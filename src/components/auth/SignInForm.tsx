@@ -125,17 +125,17 @@ export function SignInForm({ onSuccess, onError }: SignInFormProps) {
     <div className="w-full max-w-md mx-auto space-y-8">
       {/* Ultra-minimal header */}
       <div className="text-center space-y-4">
-        <h1 className="text-3xl font-thin text-foreground lowercase tracking-tight">
+        <h1 className="text-3xl font-normal text-foreground lowercase tracking-tight">
           welcome back
         </h1>
-        <p className="text-base text-muted-foreground font-light leading-relaxed">
+        <p className="text-base text-muted-foreground font-normal leading-relaxed">
           sign in to access your perfectly organized movie collection
         </p>
       </div>
 
       {/* Error message - minimal design */}
       {errorMessage && (
-        <div className="flex items-center justify-center gap-2 text-sm text-destructive/90 font-light">
+        <div className="flex items-center justify-center gap-2 text-sm text-destructive/90 font-normal">
           <AlertCircle className="h-4 w-4" />
           <span>{errorMessage}</span>
         </div>
@@ -145,7 +145,7 @@ export function SignInForm({ onSuccess, onError }: SignInFormProps) {
       <Button
         type="button"
         variant="outline"
-        className="w-full h-11 text-sm font-light bg-transparent border-border/50 hover:border-foreground/30 hover:bg-foreground/3 transition-all duration-200"
+        className="w-full h-11 text-sm font-normal bg-transparent border-border/50 hover:border-foreground/30 hover:bg-foreground/3 transition-all duration-200"
         onClick={handleGoogleSignIn}
         disabled={isGoogleLoading}
       >
@@ -183,7 +183,7 @@ export function SignInForm({ onSuccess, onError }: SignInFormProps) {
           <Separator className="w-full" />
         </div>
         <div className="relative flex justify-center text-xs uppercase">
-          <span className="bg-background px-2 text-muted-foreground/60 font-light">
+          <span className="bg-background px-2 text-muted-foreground/60 font-normal">
             or
           </span>
         </div>
@@ -197,7 +197,7 @@ export function SignInForm({ onSuccess, onError }: SignInFormProps) {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-sm font-light text-muted-foreground">
+                <FormLabel className="text-sm font-normal text-muted-foreground">
                   email
                 </FormLabel>
                 <FormControl>
@@ -206,7 +206,7 @@ export function SignInForm({ onSuccess, onError }: SignInFormProps) {
                     <Input
                       type="email"
                       placeholder="enter your email"
-                      className="pl-10 h-11 text-sm font-light bg-transparent border-border/50 focus:border-foreground/50 transition-colors duration-200"
+                      className="pl-10 h-11 text-sm font-normal bg-transparent border-border/50 focus:border-foreground/50 transition-colors duration-200"
                       {...field}
                       onChange={(e) => {
                         field.onChange(e);
@@ -215,7 +215,7 @@ export function SignInForm({ onSuccess, onError }: SignInFormProps) {
                     />
                   </div>
                 </FormControl>
-                <FormMessage className="text-xs font-light" />
+                <FormMessage className="text-xs font-normal" />
               </FormItem>
             )}
           />
@@ -225,7 +225,7 @@ export function SignInForm({ onSuccess, onError }: SignInFormProps) {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-sm font-light text-muted-foreground">
+                <FormLabel className="text-sm font-normal text-muted-foreground">
                   password
                 </FormLabel>
                 <FormControl>
@@ -234,7 +234,7 @@ export function SignInForm({ onSuccess, onError }: SignInFormProps) {
                     <Input
                       type={showPassword ? "text" : "password"}
                       placeholder="enter your password"
-                      className="pl-10 pr-10 h-11 text-sm font-light bg-transparent border-border/50 focus:border-foreground/50 transition-colors duration-200"
+                      className="pl-10 pr-10 h-11 text-sm font-normal bg-transparent border-border/50 focus:border-foreground/50 transition-colors duration-200"
                       {...field}
                       onChange={(e) => {
                         field.onChange(e);
@@ -256,14 +256,14 @@ export function SignInForm({ onSuccess, onError }: SignInFormProps) {
                     </Button>
                   </div>
                 </FormControl>
-                <FormMessage className="text-xs font-light" />
+                <FormMessage className="text-xs font-normal" />
               </FormItem>
             )}
           />
 
           <Button
             type="submit"
-            className="w-full h-11 text-sm font-light bg-foreground text-background hover:bg-foreground/90 transition-all duration-200"
+            className="w-full h-11 text-sm font-normal bg-foreground text-background hover:bg-foreground/90 transition-all duration-200"
             disabled={loginMutation.status === "pending"}
           >
             {loginMutation.status === "pending" ? (
@@ -280,11 +280,11 @@ export function SignInForm({ onSuccess, onError }: SignInFormProps) {
 
       {/* Minimal footer */}
       <div className="text-center">
-        <div className="text-sm font-light text-muted-foreground/80">
+        <div className="text-sm font-normal text-muted-foreground/80">
           don't have an account?{" "}
           <Link
             to="/auth/sign-up"
-            className="text-foreground hover:text-muted-foreground transition-colors duration-200 font-light"
+            className="text-foreground hover:text-muted-foreground transition-colors duration-200 font-normal"
           >
             sign up
           </Link>
