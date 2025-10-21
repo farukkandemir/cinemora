@@ -18,9 +18,8 @@ function RouteComponent() {
           <div className="flex items-center space-x-8">
             <Link
               to="/"
-              className="flex items-center gap-2 text-sm font-light text-muted-foreground hover:text-foreground transition-colors duration-200"
+              className="flex items-center gap-2 text-sm font-normal text-muted-foreground hover:text-foreground transition-colors duration-200"
             >
-              <ArrowLeft className="h-4 w-4" />
               back home
             </Link>
             <span className="text-sm text-muted-foreground/60 font-light">
