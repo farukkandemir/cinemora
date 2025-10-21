@@ -64,33 +64,33 @@ function LandingPage() {
       {/* Ultra-minimal header */}
       <header className="px-8 py-8">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="text-2xl font-semibold text-foreground lowercase tracking-tight">
+          <div className="text-2xl font-bold text-foreground lowercase tracking-tight">
             cinemora
           </div>
           <div className="flex items-center space-x-8">
             <ModeToggle />
-            <span className="text-sm text-muted-foreground/60 font-light">
+            <span className="text-sm text-muted-foreground/70 font-normal">
               •
             </span>
             {isAuthenticated ? (
               <button
                 onClick={goToDashboard}
-                className="text-sm font-light text-foreground hover:text-muted-foreground transition-colors duration-200 cursor-pointer"
+                className="text-sm font-medium text-foreground hover:text-primary transition-colors duration-200 cursor-pointer"
               >
                 dashboard
               </button>
             ) : (
               <button
                 onClick={goToSignIn}
-                className="text-sm font-light text-foreground hover:text-muted-foreground transition-colors duration-200 cursor-pointer"
+                className="text-sm font-medium text-foreground hover:text-primary transition-colors duration-200 cursor-pointer"
               >
                 sign in
               </button>
             )}
-            <span className="text-sm text-muted-foreground/60 font-light">
+            <span className="text-sm text-muted-foreground/70 font-normal">
               •
             </span>
-            <div className="text-sm text-muted-foreground font-light">
+            <div className="text-sm text-muted-foreground/80 font-medium">
               {new Date().toLocaleDateString("en-US", {
                 month: "short",
                 day: "numeric",
@@ -110,7 +110,7 @@ function LandingPage() {
             </h1>
 
             {/* Subtitle */}
-            <p className="hero-subtitle text-xl md:text-2xl lg:text-3xl font-light max-w-2xl mx-auto leading-relaxed">
+            <p className="hero-subtitle text-xl md:text-2xl lg:text-3xl font-normal max-w-2xl mx-auto leading-relaxed">
               perfectly organized
             </p>
           </div>
@@ -119,7 +119,7 @@ function LandingPage() {
           <div className="space-y-8">
             <button
               onClick={goToDashboard}
-              className="group relative px-8 py-4 text-lg font-light bg-primary text-primary-foreground transition-all duration-300 tracking-wide rounded-lg border border-primary/20 overflow-hidden"
+              className="group relative px-8 py-4 text-lg font-medium bg-primary text-primary-foreground hover:bg-primary/95 transition-all duration-300 rounded-lg border border-primary/20 overflow-hidden shadow-md hover:shadow-lg hover:scale-105"
             >
               <span className="relative z-10">start organizing</span>
               {/* Smooth slider reveal effect */}
@@ -129,12 +129,16 @@ function LandingPage() {
 
             {/* Benefit indicators */}
             <div className="flex justify-center">
-              <div className="flex items-center space-x-8 text-sm font-light text-muted-foreground/90">
-                <span>personal collections</span>
-                <span>•</span>
-                <span>watching lists</span>
-                <span>•</span>
-                <span>smart organization</span>
+              <div className="flex items-center space-x-6 text-sm font-normal text-muted-foreground/70">
+                <span className="text-muted-foreground/80">
+                  personal collections
+                </span>
+                <span className="text-muted-foreground/50">•</span>
+                <span className="text-muted-foreground/80">watching lists</span>
+                <span className="text-muted-foreground/50">•</span>
+                <span className="text-muted-foreground/80">
+                  smart organization
+                </span>
               </div>
             </div>
           </div>
@@ -143,9 +147,12 @@ function LandingPage() {
 
           {/* Enhanced tagline */}
           <div className="space-y-2">
-            <p className="text-sm font-light text-muted-foreground/75 max-w-lg mx-auto leading-relaxed">
-              Transform your movie-watching experience with intelligent
-              organization and beautiful design.
+            <p className="text-sm font-normal text-muted-foreground/60 max-w-lg mx-auto leading-relaxed">
+              Transform your movie-watching experience with{" "}
+              <span className="text-muted-foreground/80 font-normal">
+                intelligent organization
+              </span>{" "}
+              and beautiful design.
             </p>
           </div>
         </div>
@@ -154,17 +161,17 @@ function LandingPage() {
       {/* Footer with feedback */}
       <footer className="px-8 py-8 mt-auto">
         <div className="max-w-7xl mx-auto text-center space-y-4">
-          <div className="flex items-center justify-center space-x-8 text-sm font-light text-muted-foreground">
+          <div className="flex items-center justify-center space-x-6 text-sm font-medium text-muted-foreground/80">
             <button
               onClick={() => openFeedbackModal("bug")}
-              className="hover:text-foreground transition-colors duration-200 cursor-pointer"
+              className="hover:text-primary transition-colors duration-200 cursor-pointer"
             >
               report bug
             </button>
             <span className="text-muted-foreground/60">•</span>
             <button
               onClick={() => openFeedbackModal("suggestion")}
-              className="hover:text-foreground transition-colors duration-200 cursor-pointer"
+              className="hover:text-primary transition-colors duration-200 cursor-pointer"
             >
               suggest improvement
             </button>
