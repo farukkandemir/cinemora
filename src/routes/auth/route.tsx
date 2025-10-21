@@ -1,6 +1,5 @@
 import { createFileRoute, Outlet, Link } from "@tanstack/react-router";
 import { ModeToggle } from "@/components/shared/mode-toggle";
-import { ArrowLeft } from "lucide-react";
 
 export const Route = createFileRoute("/auth")({
   component: RouteComponent,
