@@ -122,7 +122,7 @@ export function SignInForm({ onSuccess, onError }: SignInFormProps) {
   };
 
   return (
-    <div className="w-full max-w-md mx-auto space-y-8">
+    <div className="w-full max-w-md mx-auto space-y-6">
       {/* Ultra-minimal header */}
       <div className="text-center space-y-4">
         <h1 className="text-3xl font-normal text-foreground lowercase tracking-tight">
@@ -263,7 +263,7 @@ export function SignInForm({ onSuccess, onError }: SignInFormProps) {
 
           <Button
             type="submit"
-            className="w-full h-11 text-sm font-normal bg-foreground text-background hover:bg-foreground/90 transition-all duration-200"
+            className="w-full h-11 text-sm font-normal bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-200"
             disabled={loginMutation.status === "pending"}
           >
             {loginMutation.status === "pending" ? (

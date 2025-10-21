@@ -5,13 +5,7 @@ import * as z from "zod";
 import { Link, redirect } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+
 import {
   Form,
   FormControl,
@@ -22,7 +16,6 @@ import {
 } from "@/components/ui/form";
 import { Separator } from "@/components/ui/separator";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Alert, AlertDescription } from "@/components/ui/alert";
 import {
   Eye,
   EyeOff,
@@ -163,7 +156,7 @@ export function SignUpForm({ onSuccess, onError }: SignUpFormProps) {
   };
 
   return (
-    <div className="w-full max-w-md mx-auto space-y-8">
+    <div className="w-full max-w-md mx-auto space-y-6">
       {/* Ultra-minimal header */}
       <div className="text-center space-y-4">
         <h1 className="text-3xl font-normal text-foreground lowercase tracking-tight">
@@ -404,7 +397,7 @@ export function SignUpForm({ onSuccess, onError }: SignUpFormProps) {
 
           <Button
             type="submit"
-            className="w-full h-11 text-sm font-normal bg-foreground text-background hover:bg-foreground/90 transition-all duration-200"
+            className="w-full h-11 text-sm font-normal bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-200"
             disabled={signupMutation.status === "pending"}
           >
             {signupMutation.status === "pending" ? (
