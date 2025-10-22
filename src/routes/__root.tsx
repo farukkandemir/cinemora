@@ -23,7 +23,7 @@ export const Route = createRootRouteWithContext<{
         content: "width=device-width, initial-scale=1",
       },
       {
-        title: "Cinemora - A Beautiful Way to Track Your Stories",
+        title: "cinemora",
       },
       {
         name: "description",
@@ -37,7 +37,7 @@ export const Route = createRootRouteWithContext<{
       },
       {
         name: "author",
-        content: "Cinemora",
+        content: "cinemora",
       },
     ],
     links: [
