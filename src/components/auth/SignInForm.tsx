@@ -5,13 +5,7 @@ import * as z from "zod";
 import { Link, useRouter } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+
 import {
   Form,
   FormControl,
@@ -21,7 +15,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Separator } from "@/components/ui/separator";
-import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Eye, EyeOff, Mail, Lock, AlertCircle, Loader2 } from "lucide-react";
 import { createServerFn, useServerFn } from "@tanstack/react-start";
 import { getSupabaseServerClient } from "@/lib/supabase";
@@ -104,7 +97,7 @@ export function SignInForm({ onSuccess, onError }: SignInFormProps) {
       const result = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
-          redirectTo: `${window.location.origin}/auth/callback`,
+          redirectTo: `https://test-cinemora.netlify.app/auth/callback`,
         },
       });
       if (result.error) {
