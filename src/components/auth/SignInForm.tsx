@@ -97,7 +97,7 @@ export function SignInForm({ onSuccess, onError }: SignInFormProps) {
       const result = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
-          redirectTo: `https://test-cinemora.netlify.app/auth/callback`,
+          redirectTo: `${window.location.origin}/auth/callback`,
         },
       });
       if (result.error) {
