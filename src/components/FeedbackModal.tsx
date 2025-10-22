@@ -183,10 +183,10 @@ export function FeedbackModal({
     <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogContent className="sm:max-w-[500px] bg-background border-border/50">
         <DialogHeader>
-          <DialogTitle className="text-xl font-light text-foreground lowercase tracking-tight">
+          <DialogTitle className="text-xl font-normal text-foreground lowercase tracking-tight">
             share feedback
           </DialogTitle>
-          <DialogDescription className="text-sm font-light text-muted-foreground">
+          <DialogDescription className="text-sm font-normal text-muted-foreground">
             help us improve cinemora with your thoughts and suggestions
           </DialogDescription>
         </DialogHeader>
@@ -199,7 +199,7 @@ export function FeedbackModal({
               name="type"
               render={({ field }) => (
                 <FormItem className="space-y-3">
-                  <FormLabel className="text-sm font-light text-muted-foreground">
+                  <FormLabel className="text-sm font-normal text-muted-foreground">
                     what type of feedback is this?
                   </FormLabel>
                   <FormControl>
@@ -212,7 +212,7 @@ export function FeedbackModal({
                         <RadioGroupItem value="bug" id="bug" />
                         <Label
                           htmlFor="bug"
-                          className="flex items-center space-x-2 text-sm font-light cursor-pointer"
+                          className="flex items-center space-x-2 text-sm font-normal cursor-pointer"
                         >
                           <Bug className="h-4 w-4" />
                           <span>bug report</span>
@@ -222,7 +222,7 @@ export function FeedbackModal({
                         <RadioGroupItem value="suggestion" id="suggestion" />
                         <Label
                           htmlFor="suggestion"
-                          className="flex items-center space-x-2 text-sm font-light cursor-pointer"
+                          className="flex items-center space-x-2 text-sm font-normal cursor-pointer"
                         >
                           <Lightbulb className="h-4 w-4" />
                           <span>suggestion</span>
@@ -230,7 +230,7 @@ export function FeedbackModal({
                       </div>
                     </RadioGroup>
                   </FormControl>
-                  <FormMessage className="text-xs font-light" />
+                  <FormMessage className="text-xs font-normal" />
                 </FormItem>
               )}
             />
@@ -241,17 +241,17 @@ export function FeedbackModal({
               name="subject"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-sm font-light text-muted-foreground">
+                  <FormLabel className="text-sm font-normal text-muted-foreground">
                     subject
                   </FormLabel>
                   <FormControl>
                     <Input
                       placeholder="brief summary of your feedback"
-                      className="h-11 text-sm font-light bg-transparent border-border/50 focus:border-foreground/50 transition-colors duration-200"
+                      className="h-11 text-sm font-normal bg-transparent border-border/50 focus:border-foreground/50 transition-colors duration-200"
                       {...field}
                     />
                   </FormControl>
-                  <FormMessage className="text-xs font-light" />
+                  <FormMessage className="text-xs font-normal" />
                 </FormItem>
               )}
             />
@@ -262,17 +262,17 @@ export function FeedbackModal({
               name="description"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-sm font-light text-muted-foreground">
+                  <FormLabel className="text-sm font-normal text-muted-foreground">
                     description
                   </FormLabel>
                   <FormControl>
                     <Textarea
                       placeholder="please provide details about the issue or your suggestion"
-                      className="min-h-[100px] text-sm font-light bg-transparent border-border/50 focus:border-foreground/50 transition-colors duration-200 resize-none"
+                      className="min-h-[100px] text-sm font-normal bg-transparent border-border/50 focus:border-foreground/50 transition-colors duration-200 resize-none"
                       {...field}
                     />
                   </FormControl>
-                  <FormMessage className="text-xs font-light" />
+                  <FormMessage className="text-xs font-normal" />
                 </FormItem>
               )}
             />
@@ -283,7 +283,7 @@ export function FeedbackModal({
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-sm font-light text-muted-foreground">
+                  <FormLabel className="text-sm font-normal text-muted-foreground">
                     email{" "}
                     <span className="text-muted-foreground/60">(optional)</span>
                   </FormLabel>
@@ -291,11 +291,11 @@ export function FeedbackModal({
                     <Input
                       type="email"
                       placeholder="your email address"
-                      className="h-11 text-sm font-light bg-transparent border-border/50 focus:border-foreground/50 transition-colors duration-200"
+                      className="h-11 text-sm font-normal bg-transparent border-border/50 focus:border-foreground/50 transition-colors duration-200"
                       {...field}
                     />
                   </FormControl>
-                  <FormMessage className="text-xs font-light" />
+                  <FormMessage className="text-xs font-normal" />
                 </FormItem>
               )}
             />
@@ -306,14 +306,14 @@ export function FeedbackModal({
                 type="button"
                 variant="outline"
                 onClick={handleClose}
-                className="h-9 px-4 text-sm font-light bg-transparent border-border/50 hover:border-foreground/30 hover:bg-foreground/3 transition-all duration-200"
+                className="h-9 px-4 text-sm font-normal bg-transparent border-border/50 hover:border-foreground/30 hover:bg-foreground/3 transition-all duration-200"
                 disabled={isSubmitting}
               >
                 cancel
               </Button>
               <Button
                 type="submit"
-                className="h-9 px-4 text-sm font-light bg-foreground text-background hover:bg-foreground/90 transition-all duration-200"
+                className="h-9 px-4 text-sm font-normal bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-200"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? (
