@@ -28,5 +28,7 @@ export const Route = createFileRoute("/auth/callback")({
     }
 
     await exchangeCodeFn({ data: { code: search.code } });
+
+    throw redirect({ to: "/dashboard", replace: true, search: {} });
   },
 });
