@@ -13,7 +13,7 @@ const exchangeCodeFn = createServerFn({ method: "GET" })
       throw redirect({ to: "/auth/sign-in" });
     }
 
-    throw redirect({ to: "/dashboard", replace: true, search: {} });
+    throw redirect({ to: "/dashboard" });
   });
 
 export const Route = createFileRoute("/auth/callback")({
