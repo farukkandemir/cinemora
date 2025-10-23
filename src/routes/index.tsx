@@ -16,33 +16,36 @@ import useLocalStorage from "@/hooks/use-local-storage";
 import { Separator } from "@/components/ui/separator";
 import { createServerFn } from "@tanstack/react-start";
 import { getSupabaseServerClient } from "@/lib/supabase";
+import { useSuspenseQuery } from "@tanstack/react-query";
 
 const getAuthStatusFn = createServerFn({ method: "GET" }).handler(async () => {
   const supabase = getSupabaseServerClient();
   const { data, error } = await supabase.auth.getUser();
 
   if (error || !data.user) {
-    return {
-      isAuthenticated: false,
-    };
+    return false;
   }
 
-  return {
-    isAuthenticated: true,
-  };
+  return true;
 });
 
 export const Route = createFileRoute("/")({
   component: LandingPage,
-  beforeLoad: () => getAuthStatusFn(),
   loader: ({ context }) => {
-    return context.isAuthenticated;
+    return context.queryClient.prefetchQuery({
+      queryKey: ["auth-status"],
+      queryFn: () => getAuthStatusFn(),
+    });
   },
 });
 
 function LandingPage() {
   const navigate = useNavigate();
-  const isAuthenticated = Route.useLoaderData();
+
+  const { data: isAuthenticated } = useSuspenseQuery({
+    queryKey: ["auth-status"],
+    queryFn: () => getAuthStatusFn(),
+  });
 
   const [feedbackModal, setFeedbackModal] = useState<{
     isOpen: boolean;
