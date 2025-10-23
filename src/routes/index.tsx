@@ -59,7 +59,11 @@ function LandingPage() {
   const [showWelcomeModal, setShowWelcomeModal] = useState(false);
 
   const goToDashboard = () => {
-    navigate({ to: "/dashboard" });
+    if (isAuthenticated) {
+      navigate({ to: "/dashboard" });
+    } else {
+      navigate({ to: "/auth/sign-in" });
+    }
   };
 
   const goToSignIn = () => {
