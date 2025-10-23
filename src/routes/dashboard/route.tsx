@@ -14,6 +14,7 @@ import {
   redirect,
   useNavigate,
   Link,
+  useLocation,
 } from "@tanstack/react-router";
 import {
   Grid3X3,
@@ -41,6 +42,8 @@ import {
 } from "@/components/context/dashboard-prefs";
 import { createMiddleware, createServerFn } from "@tanstack/react-start";
 import { getSupabaseServerClient } from "@/lib/supabase";
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabase-client";
 
 const authMiddleware = createMiddleware().server(async ({ next }) => {
   const supabase = getSupabaseServerClient();
@@ -81,6 +84,55 @@ function AppSidebar() {
   const user = Route.useLoaderData();
   const navigate = useNavigate();
   const { preferences, setDensity, setPosterSize } = useDashboardPrefs();
+  const location = useLocation();
+  const [isProcessingCode, setIsProcessingCode] = useState(false);
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const code = searchParams.get("code");
+
+    if (code) {
+      console.log(
+        "🛡️ Dashboard component detected code parameter - processing"
+      );
+      setIsProcessingCode(true);
+
+      const processCode = async () => {
+        try {
+          const { error } = await supabase.auth.exchangeCodeForSession(code);
+
+          if (!error) {
+            console.log(
+              "✅ Code processed, redirecting to clean dashboard URL"
+            );
+            // Navigate to clean URL without code parameter
+            navigate({ to: "/dashboard", replace: true });
+          } else {
+            console.error("❌ Code processing failed:", error);
+            navigate({ to: "/auth/sign-in", replace: true });
+          }
+        } catch (err) {
+          console.error("❌ Code processing error:", err);
+          navigate({ to: "/auth/sign-in", replace: true });
+        } finally {
+          setIsProcessingCode(false);
+        }
+      };
+
+      processCode();
+    }
+  }, [location.search, navigate]);
+
+  if (isProcessingCode) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-center space-y-4">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto"></div>
+          <p className="text-muted-foreground">Completing sign in...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div>
