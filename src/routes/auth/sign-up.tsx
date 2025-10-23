@@ -8,9 +8,7 @@ export const Route = createFileRoute("/auth/sign-up")({
 
 function RouteComponent() {
   const handleSuccess = () => {
-    toast.success(
-      "Account created successfully! Please check your email to verify your account."
-    );
+    toast.success("Account created successfully!");
   };
 
   const handleError = (error: string) => {
