@@ -58,6 +58,8 @@ export function useUserLibrary() {
         notes: item.notes,
       }));
     },
+    staleTime: 5 * 60 * 1000,
+    gcTime: 10 * 60 * 1000,
   });
 
   const addItemMutation = useMutation({
