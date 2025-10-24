@@ -1,32 +1,41 @@
-import { useCallback, useState } from "react";
+import { useCallback, useState, useEffect } from "react";
 
 function useLocalStorage<T>(key: string, initialValue: T) {
-  const [storedValue, setStoredValue] = useState<T>(() => {
-    if (typeof window === "undefined") return initialValue;
+  const [storedValue, setStoredValue] = useState<T>(initialValue);
+
+  // Initialize from localStorage after component mounts (client-side only)
+  useEffect(() => {
+    if (typeof window === "undefined") return;
 
     try {
       const item = window.localStorage.getItem(key);
-      return item ? JSON.parse(item) : initialValue;
-    } catch {
-      return initialValue;
+      if (item) {
+        const parsed = JSON.parse(item);
+        setStoredValue(parsed);
+      }
+    } catch (error) {
+      console.warn(`Failed to load localStorage item "${key}":`, error);
     }
-  });
+  }, [key]);
 
   const setValue = useCallback(
     (value: T | ((val: T) => T)) => {
       try {
-        const valueToStore =
-          value instanceof Function ? value(storedValue) : value;
-        setStoredValue(valueToStore);
+        setStoredValue((prevValue) => {
+          const valueToStore =
+            value instanceof Function ? value(prevValue) : value;
 
-        if (typeof window !== "undefined") {
-          window.localStorage.setItem(key, JSON.stringify(valueToStore));
-        }
-      } catch {
-        // Silently fail if storage is unavailable
+          if (typeof window !== "undefined") {
+            window.localStorage.setItem(key, JSON.stringify(valueToStore));
+          }
+
+          return valueToStore;
+        });
+      } catch (error) {
+        console.warn(`Failed to save localStorage item "${key}":`, error);
       }
     },
-    [key, storedValue]
+    [key]
   );
 
   const removeValue = useCallback(() => {
@@ -35,8 +44,8 @@ function useLocalStorage<T>(key: string, initialValue: T) {
       if (typeof window !== "undefined") {
         window.localStorage.removeItem(key);
       }
-    } catch {
-      // Silently fail
+    } catch (error) {
+      console.warn(`Failed to remove localStorage item "${key}":`, error);
     }
   }, [key, initialValue]);
 

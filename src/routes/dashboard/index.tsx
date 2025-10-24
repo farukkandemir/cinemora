@@ -120,20 +120,20 @@ function KanbanCard({
         </span>
       </div>
 
-      {/* Menu Button - Top Right Corner */}
+      {/* Menu Button - Always visible on left side */}
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button
             variant="ghost"
             size="sm"
-            className="absolute top-2 right-10 h-6 w-6 p-0 opacity-0 group-hover:opacity-100 transition-opacity text-white hover:bg-white/20 z-10"
-            title="More options"
+            className="absolute top-2 left-2 h-7 w-7 p-0 bg-black/20 hover:bg-black/40 backdrop-blur-sm border border-white/10 text-white shadow-lg z-10"
+            title="Move card"
           >
-            <MoreHorizontal className="h-3 w-3" />
+            <MoreHorizontal className="h-4 w-4" />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent
-          align="end"
+          align="start"
           sideOffset={4}
           className="w-44 p-1 bg-popover shadow-md rounded-md border-none"
         >
