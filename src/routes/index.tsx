@@ -110,6 +110,15 @@ function LandingPage() {
             <span className="text-sm text-muted-foreground/70 font-normal">
               •
             </span>
+            <button
+              onClick={() => navigate({ to: "/upcoming-features" })}
+              className="text-sm font-medium text-foreground hover:text-primary transition-colors duration-200 cursor-pointer"
+            >
+              upcoming
+            </button>
+            <span className="text-sm text-muted-foreground/70 font-normal">
+              •
+            </span>
             {isAuthenticated ? (
               <button
                 onClick={goToDashboard}

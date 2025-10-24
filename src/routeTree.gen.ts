@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as UpcomingFeaturesRouteImport } from './routes/upcoming-features'
 import { Route as LogoutRouteImport } from './routes/logout'
 import { Route as DashboardRouteRouteImport } from './routes/dashboard/route'
 import { Route as AuthRouteRouteImport } from './routes/auth/route'
@@ -18,6 +19,11 @@ import { Route as AuthSignUpRouteImport } from './routes/auth/sign-up'
 import { Route as AuthSignInRouteImport } from './routes/auth/sign-in'
 import { Route as AuthCallbackRouteImport } from './routes/auth/callback'
 
+const UpcomingFeaturesRoute = UpcomingFeaturesRouteImport.update({
+  id: '/upcoming-features',
+  path: '/upcoming-features',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LogoutRoute = LogoutRouteImport.update({
   id: '/logout',
   path: '/logout',
@@ -64,6 +70,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRouteRouteWithChildren
   '/dashboard': typeof DashboardRouteRouteWithChildren
   '/logout': typeof LogoutRoute
+  '/upcoming-features': typeof UpcomingFeaturesRoute
   '/auth/callback': typeof AuthCallbackRoute
   '/auth/sign-in': typeof AuthSignInRoute
   '/auth/sign-up': typeof AuthSignUpRoute
@@ -73,6 +80,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRouteRouteWithChildren
   '/logout': typeof LogoutRoute
+  '/upcoming-features': typeof UpcomingFeaturesRoute
   '/auth/callback': typeof AuthCallbackRoute
   '/auth/sign-in': typeof AuthSignInRoute
   '/auth/sign-up': typeof AuthSignUpRoute
@@ -84,6 +92,7 @@ export interface FileRoutesById {
   '/auth': typeof AuthRouteRouteWithChildren
   '/dashboard': typeof DashboardRouteRouteWithChildren
   '/logout': typeof LogoutRoute
+  '/upcoming-features': typeof UpcomingFeaturesRoute
   '/auth/callback': typeof AuthCallbackRoute
   '/auth/sign-in': typeof AuthSignInRoute
   '/auth/sign-up': typeof AuthSignUpRoute
@@ -96,6 +105,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/dashboard'
     | '/logout'
+    | '/upcoming-features'
     | '/auth/callback'
     | '/auth/sign-in'
     | '/auth/sign-up'
@@ -105,6 +115,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/logout'
+    | '/upcoming-features'
     | '/auth/callback'
     | '/auth/sign-in'
     | '/auth/sign-up'
@@ -115,6 +126,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/dashboard'
     | '/logout'
+    | '/upcoming-features'
     | '/auth/callback'
     | '/auth/sign-in'
     | '/auth/sign-up'
@@ -126,10 +138,18 @@ export interface RootRouteChildren {
   AuthRouteRoute: typeof AuthRouteRouteWithChildren
   DashboardRouteRoute: typeof DashboardRouteRouteWithChildren
   LogoutRoute: typeof LogoutRoute
+  UpcomingFeaturesRoute: typeof UpcomingFeaturesRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/upcoming-features': {
+      id: '/upcoming-features'
+      path: '/upcoming-features'
+      fullPath: '/upcoming-features'
+      preLoaderRoute: typeof UpcomingFeaturesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/logout': {
       id: '/logout'
       path: '/logout'
@@ -222,6 +242,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRouteRoute: AuthRouteRouteWithChildren,
   DashboardRouteRoute: DashboardRouteRouteWithChildren,
   LogoutRoute: LogoutRoute,
+  UpcomingFeaturesRoute: UpcomingFeaturesRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
