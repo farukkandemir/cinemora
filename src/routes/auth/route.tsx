@@ -11,7 +11,7 @@ function RouteComponent() {
       {/* Ultra-minimal header - following landing page pattern */}
       <header className="px-8 py-8">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="text-2xl font-semibold text-foreground lowercase tracking-tight">
+          <div className="text-2xl font-bold text-foreground lowercase tracking-tight">
             cinemora
           </div>
           <div className="flex items-center space-x-8">
