@@ -20,5 +20,8 @@ const logoutFn = createServerFn().handler(async () => {
 
 export const Route = createFileRoute("/logout")({
   preload: false,
-  loader: () => logoutFn(),
+  loader: ({ context }) => {
+    context.queryClient.invalidateQueries({ queryKey: ["auth-status"] });
+    return logoutFn();
+  },
 });
