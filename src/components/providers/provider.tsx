@@ -15,7 +15,7 @@ export function Providers({ children }: ProvidersProps) {
       disableTransitionOnChange
     >
       {children}
-      <Toaster position="top-center" richColors />
+      <Toaster position="top-center" richColors duration={1000} />
     </NextThemesProvider>
   );
 }
