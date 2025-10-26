@@ -56,7 +56,7 @@ export function ModeToggle({ variant = "landing" }: ModeToggleProps) {
           <button
             key={theme}
             onClick={() => setTheme(theme)}
-            className={`h-7 px-1.5 text-xs font-medium rounded-md transition-all duration-200 flex items-center justify-center ${
+            className={`h-7 px-1.5 text-xs font-normal rounded-md transition-all duration-200 flex items-center justify-center ${
               active
                 ? "bg-primary text-primary-foreground hover:bg-primary/90"
                 : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
@@ -74,7 +74,7 @@ export function ModeToggle({ variant = "landing" }: ModeToggleProps) {
   return (
     <button
       onClick={handleThemeToggle}
-      className="text-sm font-light text-muted-foreground hover:text-foreground transition-colors duration-200"
+      className="text-sm font-normal text-muted-foreground hover:text-foreground transition-colors duration-200"
     >
       {resolvedTheme === "dark" ? "light" : "dark"}
       <span className="sr-only">Toggle theme</span>

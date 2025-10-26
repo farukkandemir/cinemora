@@ -28,7 +28,7 @@ const features = [
 
 function UpcomingFeaturesPage() {
   return (
-    <div className="flex-1">
+    <div className="w-full self-start pt-8 pb-16">
       <div className="max-w-4xl mx-auto">
         {/* Hero Section */}
         <div className="text-center mb-12">
