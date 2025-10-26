@@ -35,8 +35,6 @@ export const Route = createFileRoute("/")({
     return context.queryClient.prefetchQuery({
       queryKey: ["auth-status"],
       queryFn: () => getAuthStatusFn(),
-      staleTime: 5 * 60 * 1000,
-      gcTime: 10 * 60 * 1000,
     });
   },
 });
@@ -47,8 +45,6 @@ function LandingPage() {
   const { data: isAuthenticated } = useQuery({
     queryKey: ["auth-status"],
     queryFn: () => getAuthStatusFn(),
-    staleTime: 5 * 60 * 1000,
-    gcTime: 10 * 60 * 1000,
   });
 
   const [feedbackModal, setFeedbackModal] = useState<{
