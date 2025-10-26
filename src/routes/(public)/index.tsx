@@ -1,8 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useNavigate } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
-import { ModeToggle } from "@/components/shared/mode-toggle";
-import { FeedbackModal } from "@/components/FeedbackModal";
 import {
   Dialog,
   DialogContent,
@@ -14,22 +12,10 @@ import { Button } from "@/components/ui/button";
 import useLocalStorage from "@/hooks/use-local-storage";
 
 import { Separator } from "@/components/ui/separator";
-import { createServerFn } from "@tanstack/react-start";
-import { getSupabaseServerClient } from "@/lib/supabase";
 import { useQuery } from "@tanstack/react-query";
+import { getAuthStatusFn } from "@/fn/auth";
 
-const getAuthStatusFn = createServerFn({ method: "GET" }).handler(async () => {
-  const supabase = getSupabaseServerClient();
-  const { data, error } = await supabase.auth.getUser();
-
-  if (error || !data.user) {
-    return false;
-  }
-
-  return true;
-});
-
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/(public)/")({
   component: LandingPage,
   loader: ({ context }) => {
     return context.queryClient.prefetchQuery({
@@ -47,14 +33,6 @@ function LandingPage() {
     queryFn: () => getAuthStatusFn(),
   });
 
-  const [feedbackModal, setFeedbackModal] = useState<{
-    isOpen: boolean;
-    type: "bug" | "suggestion";
-  }>({
-    isOpen: false,
-    type: "bug",
-  });
-
   const [hasSeenWelcome, setHasSeenWelcome] = useLocalStorage(
     "hasSeenWelcome",
     false
@@ -67,18 +45,6 @@ function LandingPage() {
     } else {
       navigate({ to: "/auth/sign-in" });
     }
-  };
-
-  const goToSignIn = () => {
-    return navigate({ to: "/auth/sign-in" });
-  };
-
-  const openFeedbackModal = (type: "bug" | "suggestion") => {
-    setFeedbackModal({ isOpen: true, type });
-  };
-
-  const closeFeedbackModal = () => {
-    setFeedbackModal({ isOpen: false, type: "bug" });
   };
 
   useEffect(() => {
@@ -94,61 +60,13 @@ function LandingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
-      {/* Ultra-minimal header */}
-      <header className="px-8 py-8">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="text-2xl font-bold text-foreground lowercase tracking-tight">
-            cinemora
-          </div>
-          <div className="flex items-center space-x-8">
-            <ModeToggle />
-            <span className="text-sm text-muted-foreground/70 font-normal">
-              •
-            </span>
-            <button
-              onClick={() => navigate({ to: "/upcoming-features" })}
-              className="text-sm font-medium text-foreground hover:text-primary transition-colors duration-200 cursor-pointer"
-            >
-              upcoming
-            </button>
-            <span className="text-sm text-muted-foreground/70 font-normal">
-              •
-            </span>
-            {isAuthenticated ? (
-              <button
-                onClick={goToDashboard}
-                className="text-sm font-medium text-foreground hover:text-primary transition-colors duration-200 cursor-pointer"
-              >
-                dashboard
-              </button>
-            ) : (
-              <button
-                onClick={goToSignIn}
-                className="text-sm font-medium text-foreground hover:text-primary transition-colors duration-200 cursor-pointer"
-              >
-                sign in
-              </button>
-            )}
-            <span className="text-sm text-muted-foreground/70 font-normal">
-              •
-            </span>
-            <div className="text-sm text-muted-foreground/80 font-medium">
-              {new Date().toLocaleDateString("en-US", {
-                month: "short",
-                day: "numeric",
-              })}
-            </div>
-          </div>
-        </div>
-      </header>
-
+    <div className="h-full flex flex-col">
       {/* Centered hero - the only content */}
       <main className="flex-1 flex items-center justify-center px-6 py-12">
         <div className="max-w-6xl mx-auto text-center space-y-12">
           {/* Massive headline */}
           <div className="space-y-4">
-            <h1 className="hero-headline text-6xl md:text-8xl lg:text-[10rem] xl:text-[12rem] font-thin leading-none tracking-tight">
+            <h1 className="hero-headline text-8xl md:text-9xl lg:text-[10rem] xl:text-[12rem] font-thin leading-none tracking-tight">
               your movies
             </h1>
 
@@ -200,34 +118,6 @@ function LandingPage() {
           </div>
         </div>
       </main>
-
-      {/* Footer with feedback */}
-      <footer className="px-8 py-8 mt-auto">
-        <div className="max-w-7xl mx-auto text-center space-y-4">
-          <div className="flex items-center justify-center space-x-6 text-sm font-medium text-muted-foreground/80">
-            <button
-              onClick={() => openFeedbackModal("bug")}
-              className="hover:text-primary transition-colors duration-200 cursor-pointer"
-            >
-              report bug
-            </button>
-            <span className="text-muted-foreground/60">•</span>
-            <button
-              onClick={() => openFeedbackModal("suggestion")}
-              className="hover:text-primary transition-colors duration-200 cursor-pointer"
-            >
-              suggest improvement
-            </button>
-          </div>
-        </div>
-      </footer>
-
-      {/* Feedback Modal */}
-      <FeedbackModal
-        isOpen={feedbackModal.isOpen}
-        onClose={closeFeedbackModal}
-        initialType={feedbackModal.type}
-      />
 
       {/* Welcome Modal */}
       {showWelcomeModal && (

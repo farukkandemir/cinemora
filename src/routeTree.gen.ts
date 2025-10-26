@@ -9,21 +9,17 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as UpcomingFeaturesRouteImport } from './routes/upcoming-features'
 import { Route as LogoutRouteImport } from './routes/logout'
 import { Route as DashboardRouteRouteImport } from './routes/dashboard/route'
 import { Route as AuthRouteRouteImport } from './routes/auth/route'
-import { Route as IndexRouteImport } from './routes/index'
+import { Route as publicRouteRouteImport } from './routes/(public)/route'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
+import { Route as publicIndexRouteImport } from './routes/(public)/index'
 import { Route as AuthSignUpRouteImport } from './routes/auth/sign-up'
 import { Route as AuthSignInRouteImport } from './routes/auth/sign-in'
 import { Route as AuthCallbackRouteImport } from './routes/auth/callback'
+import { Route as publicUpcomingFeaturesRouteImport } from './routes/(public)/upcoming-features'
 
-const UpcomingFeaturesRoute = UpcomingFeaturesRouteImport.update({
-  id: '/upcoming-features',
-  path: '/upcoming-features',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const LogoutRoute = LogoutRouteImport.update({
   id: '/logout',
   path: '/logout',
@@ -39,15 +35,19 @@ const AuthRouteRoute = AuthRouteRouteImport.update({
   path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const publicRouteRoute = publicRouteRouteImport.update({
+  id: '/(public)',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DashboardIndexRoute = DashboardIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => DashboardRouteRoute,
+} as any)
+const publicIndexRoute = publicIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => publicRouteRoute,
 } as any)
 const AuthSignUpRoute = AuthSignUpRouteImport.update({
   id: '/sign-up',
@@ -64,38 +64,44 @@ const AuthCallbackRoute = AuthCallbackRouteImport.update({
   path: '/callback',
   getParentRoute: () => AuthRouteRoute,
 } as any)
+const publicUpcomingFeaturesRoute = publicUpcomingFeaturesRouteImport.update({
+  id: '/upcoming-features',
+  path: '/upcoming-features',
+  getParentRoute: () => publicRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
+  '/': typeof publicIndexRoute
   '/auth': typeof AuthRouteRouteWithChildren
   '/dashboard': typeof DashboardRouteRouteWithChildren
   '/logout': typeof LogoutRoute
-  '/upcoming-features': typeof UpcomingFeaturesRoute
+  '/upcoming-features': typeof publicUpcomingFeaturesRoute
   '/auth/callback': typeof AuthCallbackRoute
   '/auth/sign-in': typeof AuthSignInRoute
   '/auth/sign-up': typeof AuthSignUpRoute
   '/dashboard/': typeof DashboardIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
   '/auth': typeof AuthRouteRouteWithChildren
   '/logout': typeof LogoutRoute
-  '/upcoming-features': typeof UpcomingFeaturesRoute
+  '/upcoming-features': typeof publicUpcomingFeaturesRoute
   '/auth/callback': typeof AuthCallbackRoute
   '/auth/sign-in': typeof AuthSignInRoute
   '/auth/sign-up': typeof AuthSignUpRoute
+  '/': typeof publicIndexRoute
   '/dashboard': typeof DashboardIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
+  '/(public)': typeof publicRouteRouteWithChildren
   '/auth': typeof AuthRouteRouteWithChildren
   '/dashboard': typeof DashboardRouteRouteWithChildren
   '/logout': typeof LogoutRoute
-  '/upcoming-features': typeof UpcomingFeaturesRoute
+  '/(public)/upcoming-features': typeof publicUpcomingFeaturesRoute
   '/auth/callback': typeof AuthCallbackRoute
   '/auth/sign-in': typeof AuthSignInRoute
   '/auth/sign-up': typeof AuthSignUpRoute
+  '/(public)/': typeof publicIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
 }
 export interface FileRouteTypes {
@@ -112,44 +118,37 @@ export interface FileRouteTypes {
     | '/dashboard/'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/'
     | '/auth'
     | '/logout'
     | '/upcoming-features'
     | '/auth/callback'
     | '/auth/sign-in'
     | '/auth/sign-up'
+    | '/'
     | '/dashboard'
   id:
     | '__root__'
-    | '/'
+    | '/(public)'
     | '/auth'
     | '/dashboard'
     | '/logout'
-    | '/upcoming-features'
+    | '/(public)/upcoming-features'
     | '/auth/callback'
     | '/auth/sign-in'
     | '/auth/sign-up'
+    | '/(public)/'
     | '/dashboard/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
+  publicRouteRoute: typeof publicRouteRouteWithChildren
   AuthRouteRoute: typeof AuthRouteRouteWithChildren
   DashboardRouteRoute: typeof DashboardRouteRouteWithChildren
   LogoutRoute: typeof LogoutRoute
-  UpcomingFeaturesRoute: typeof UpcomingFeaturesRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/upcoming-features': {
-      id: '/upcoming-features'
-      path: '/upcoming-features'
-      fullPath: '/upcoming-features'
-      preLoaderRoute: typeof UpcomingFeaturesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/logout': {
       id: '/logout'
       path: '/logout'
@@ -171,11 +170,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
+    '/(public)': {
+      id: '/(public)'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+      preLoaderRoute: typeof publicRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dashboard/': {
@@ -184,6 +183,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/dashboard/'
       preLoaderRoute: typeof DashboardIndexRouteImport
       parentRoute: typeof DashboardRouteRoute
+    }
+    '/(public)/': {
+      id: '/(public)/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof publicIndexRouteImport
+      parentRoute: typeof publicRouteRoute
     }
     '/auth/sign-up': {
       id: '/auth/sign-up'
@@ -206,8 +212,29 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthCallbackRouteImport
       parentRoute: typeof AuthRouteRoute
     }
+    '/(public)/upcoming-features': {
+      id: '/(public)/upcoming-features'
+      path: '/upcoming-features'
+      fullPath: '/upcoming-features'
+      preLoaderRoute: typeof publicUpcomingFeaturesRouteImport
+      parentRoute: typeof publicRouteRoute
+    }
   }
 }
+
+interface publicRouteRouteChildren {
+  publicUpcomingFeaturesRoute: typeof publicUpcomingFeaturesRoute
+  publicIndexRoute: typeof publicIndexRoute
+}
+
+const publicRouteRouteChildren: publicRouteRouteChildren = {
+  publicUpcomingFeaturesRoute: publicUpcomingFeaturesRoute,
+  publicIndexRoute: publicIndexRoute,
+}
+
+const publicRouteRouteWithChildren = publicRouteRoute._addFileChildren(
+  publicRouteRouteChildren,
+)
 
 interface AuthRouteRouteChildren {
   AuthCallbackRoute: typeof AuthCallbackRoute
@@ -238,11 +265,10 @@ const DashboardRouteRouteWithChildren = DashboardRouteRoute._addFileChildren(
 )
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
+  publicRouteRoute: publicRouteRouteWithChildren,
   AuthRouteRoute: AuthRouteRouteWithChildren,
   DashboardRouteRoute: DashboardRouteRouteWithChildren,
   LogoutRoute: LogoutRoute,
-  UpcomingFeaturesRoute: UpcomingFeaturesRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
