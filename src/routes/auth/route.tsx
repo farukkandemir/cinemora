@@ -10,9 +10,9 @@ function RouteComponent() {
     <div className="min-h-screen bg-background flex flex-col">
       {/* Ultra-minimal header - following landing page pattern */}
       <header className="px-8 py-8">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
+        <div className="max-w-7xl mx-auto flex items-baseline justify-between">
           <div className="text-2xl font-bold text-foreground lowercase tracking-tight">
-            cinemora
+            <Link to="/">cinemora</Link>
           </div>
           <div className="flex items-center space-x-8">
             <Link
