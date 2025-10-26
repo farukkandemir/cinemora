@@ -10,10 +10,10 @@ function UpcomingFeaturesPage() {
       <div className="max-w-4xl mx-auto">
         {/* Hero Section */}
         <div className="text-center mb-20">
-          <h1 className="hero-headline text-4xl md:text-6xl lg:text-7xl font-thin leading-none tracking-tight mb-4">
+          <h1 className="hero-headline text-5xl md:text-7xl lg:text-8xl font-thin leading-none tracking-tight mb-4">
             roadmap
           </h1>
-          <p className="hero-subtitle text-base md:text-lg font-normal max-w-md mx-auto leading-relaxed">
+          <p className="hero-subtitle text-lg md:text-xl lg:text-2xl font-normal max-w-md mx-auto leading-relaxed">
             features in development
           </p>
         </div>
